@@ -34,6 +34,7 @@ public class Exercicio02 {
             
             System.out.print("Informe o número do comando: ");
             op = in.nextInt();
+            in.nextLine();
             System.out.println("");
 
             switch (op) {
@@ -43,10 +44,9 @@ public class Exercicio02 {
                         System.out.println("Informe o nome: ");
                         nomes[numNomes] = in.next();
                         numNomes++;
-                        System.out.println("Nome cadastrado!");
-                        System.out.println(numNomes);
+                        System.out.println("Nome cadastrado!\n");
                     } else {
-                        System.out.println("Máximo de nomes cadastrados (10)");
+                        System.out.println("Máximo de nomes cadastrados (10)\n");
                     }
                     break;
                 }
@@ -59,23 +59,26 @@ public class Exercicio02 {
                         System.out.println("Lista vazia.");
                     }
                     if (numNomes < 10) {
-                        System.out.println(10 - numNomes + " entradas restantes.");
+                        System.out.println(10 - numNomes + " entradas restantes.\n");
                     }
                 }
                 // Alterar nome
                 case 3 -> {
                     if (numNomes == 0) {
-                        System.out.println("Não há nomes cadastrados");
+                        System.out.println("Não há nomes cadastrados\n");
                     } else {
                         System.out.println("Informe a posição do nome: (0 para sair)");
                         int posicao = in.nextInt();
                         if (posicao == 0) {
+                            System.out.println("");
                             break;
                         }
                         if (posicao > 0 && posicao <= numNomes) {
                             System.out.println("Informe o novo nome: ");
                             nomes[posicao - 1] = in.next();
-                            System.out.println("Alteração realizada com sucesso!");
+                            System.out.println("Alteração realizada com sucesso!\n");
+                        } else {
+                            System.out.println("Posição inválida!\n");
                         }
                     }
                     break;
@@ -83,11 +86,12 @@ public class Exercicio02 {
                 // Remover nome
                 case 4 -> {
                     if (numNomes == 0) {
-                        System.out.println("Não há nomes cadastrados");
+                        System.out.println("Não há nomes cadastrados.\n");
                     } else {
                         System.out.println("Informe a posição do nome: (0 para sair)");
                         int posicao = in.nextInt();
                         if (posicao == 0) {
+                            System.out.println("");
                             break;
                         }
                         if (posicao > 0 && posicao <= numNomes) {
@@ -101,7 +105,7 @@ public class Exercicio02 {
                             }
                             nomes = tempNomes;
                         } else {
-                            System.out.println("Posição inválida");
+                            System.out.println("Posição inválida.\n");
                         }
                     }
                     break;
@@ -113,10 +117,9 @@ public class Exercicio02 {
                 }
                 // Default
                 default -> {
-                    System.out.println("Comando inválido.");
+                    System.out.println("Comando inválido.\n");
                 }
             }
-            System.out.println("");
         }
         in.close();
     }
