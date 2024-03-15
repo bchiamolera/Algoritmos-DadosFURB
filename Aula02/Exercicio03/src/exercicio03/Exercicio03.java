@@ -2,7 +2,6 @@ package exercicio03;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.Vector;
 
 /*
  * Utilizando um ArrayList, crie um algoritmo com as seguintes funcionalidades:
@@ -18,9 +17,10 @@ import java.util.Vector;
  * @author Bernardo Chiamolera
  */
 public class Exercicio03 {
+
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        ArrayList<String> produtos = new ArrayList<>();
+        ArrayList<Produto> produtos = new ArrayList<>();
         boolean close = false;
         int op;
 
@@ -40,18 +40,90 @@ public class Exercicio03 {
 
             switch (op) {
                 case 1 -> {
+                    System.out.println("Digite o nome do produto: ");
+                    String nome = in.nextLine().trim();
+                    System.out.println("Digite o segmento do produto: ");
+                    String segmento = in.nextLine().trim();
+                    produtos.add(new Produto(nome, segmento));
+                    System.out.println("Produto cadastrado com sucesso!");
                     break;
                 }
                 case 2 -> {
+                    if (produtos.size() > 0) {
+                        System.out.println("Produtos: ");
+                        for (int i = 0; i < produtos.size(); i++) {
+                            Produto p = produtos.get(i);
+                            System.out.println((i + 1) + ". " + p.getNome() + " - " + p.getSegmento());
+                        }
+                    } else {
+                        System.out.println("Não há produtos cadastrados!");
+                    }
                     break;
                 }
                 case 3 -> {
+                    if (!produtos.isEmpty()) {
+                        ArrayList<String> segmentos = new ArrayList<>();
+                        for (Produto p : produtos) {
+                            String segmento = p.getSegmento();
+                            if (!segmentos.contains(segmento.toLowerCase())) {
+                                segmentos.add(segmento.toLowerCase());
+                            }
+                        }
+                        System.out.println("Segmento(s):");
+                        for (int i = 0; i < segmentos.size(); i++) {
+                            int qtd = 0;
+                            for (Produto p : produtos) {
+                                if (p.getSegmento().toLowerCase().equals(segmentos.get(i))) {
+                                    qtd++;
+                                }
+                            }
+                            System.out.println((i + 1) + ". " + segmentos.get(i) + " - Qtd. produtos: " + qtd);
+                        }
+                    } else {
+                        System.out.println("Não há produtos cadastrados!");
+                    }
                     break;
                 }
                 case 4 -> {
+                    if (!produtos.isEmpty()) {
+                        System.out.println("Digite a posição do produto (0 para sair)");
+                        int index = in.nextInt();
+                        in.nextLine();
+                        if (index == 0) {
+                            break;
+                        } else if (index - 1 < produtos.size()) {
+                            Produto p = produtos.get(index - 1);
+                            System.out.println("Novo nome: ");
+                            String nome = in.nextLine().trim();
+                            p.setNome(nome);
+                            System.out.println("Novo segmento: ");
+                            String segmento = in.nextLine().trim();
+                            p.setSegmento(segmento);
+                            System.out.println("Produto alterado com sucesso!");
+                        } else {
+                            System.out.println("Produto não encontrado!");
+                        }
+                    } else {
+                        System.out.println("Não há produtos cadastrados!");
+                    }
                     break;
                 }
                 case 5 -> {
+                    if (!produtos.isEmpty()) {
+                        System.out.println("Digite a posição do produto (0 para sair)");
+                        int index = in.nextInt();
+                        in.nextLine();
+                        if (index == 0) {
+                            break;
+                        } else if (index - 1 < produtos.size()) {
+                            produtos.remove(index - 1);
+                            System.out.println("Produto removido com sucesso!");
+                        } else {
+                            System.out.println("Produto não encontrado!");
+                        }
+                    } else {
+                        System.out.println("Não há produtos cadastrados!");
+                    }
                     break;
                 }
                 case 6 -> {
@@ -62,6 +134,8 @@ public class Exercicio03 {
                     System.out.println("Comando inválido!\n");
                 }
             }
+
+            System.out.println("");
         }
         in.close();
     }
